@@ -1,0 +1,36 @@
+ruby:
+  current_challenge = Challenge.current_challenge
+
+nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top
+  button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link href="/"
+          | Home
+      li.nav-item
+        = link_to activities_path, class: 'nav-link' do
+          span data-feather="activity"
+          | Activities
+      - if current_challenge.present?
+        li.nav-item
+          = link_to challenge_path(current_challenge), class: 'nav-link' do
+            span data-feather="activity"
+            | Current Challenge
+      li.nav-item
+        = link_to challenges_path, class: 'nav-link' do
+          span data-feather="star"
+          | Challenges
+      li.nav-item
+        = link_to users_path, class: 'nav-link' do
+          span data-feather="users"
+          | Users
+      li.nav-item
+        = link_to edit_user_path(current_user), class: 'nav-link' do
+          span data-feather="database"
+          | Change Password
+      li.nav-item
+        = link_to destroy_user_session_path, class: 'nav-link', method: :delete do
+          span data-feather="log-out"
+          | Logout

@@ -1,0 +1,71 @@
+.mb-3
+= form_for challenge do |f|
+  .form-group
+    label Name
+    = f.text_field :name, class: 'form-control', required: true
+  .form-group
+    label Start Date
+    = f.date_field :start_date, class: 'form-control', required: true
+  .form-group
+    label End Date
+    = f.date_field :end_date, class: 'form-control', required: true
+  .form-group
+    label Min Distance (metter)
+    = f.number_field :min_distance, class: 'form-control', required: true
+  .form-group
+    label Min Pace (min/km)
+    = f.number_field :min_pace, class: 'form-control', required: true
+  .form-group
+    label Min Trail Distance (metter)
+    = f.number_field :min_trail_distance, class: 'form-control', required: true
+  .form-group
+    label Min Trail Pace (min/km)
+    = f.number_field :min_trail_pace, class: 'form-control', required: true
+  .form-group
+    label Min Trail Elevation (metter)
+    = f.number_field :min_trail_elevation_gain, class: 'form-control', required: true
+  .form-group
+    label WO limit
+    = f.check_box :wo_limit, class: 'form-control'
+  .form-group
+    label W1 / WO
+    = f.number_field :w1, class: 'form-control', required: true
+  .form-group
+    label W2 / WO
+    = f.number_field :w2, class: 'form-control', required: true
+  .form-group
+    label W3 / WO
+    = f.number_field :w3, class: 'form-control', required: true
+  .form-group
+    label W4 / WO
+    = f.number_field :w4, class: 'form-control', required: true
+  .form-group
+    label W5 / WO
+    = f.number_field :w5, class: 'form-control', required: true
+  .form-group
+    label W6 / WO
+    = f.number_field :w6, class: 'form-control', required: true
+  .form-group
+    label KM Money
+    = f.number_field :km_money, class: 'form-control', required: true
+  .form-group
+    label WO Money
+    = f.number_field :wo_money, class: 'form-control', required: true
+  .form-group
+    label HM Money
+    = f.number_field :hm_money, class: 'form-control', required: true
+  .form-group
+    label Users
+    ul
+      - challenge.challenge_user_mappings.order(target: :DESC).each do |mapping|
+        = f.fields_for :challenge_user_mappings, mapping do |mapping_form|
+          li style="border-bottom: 1px solid #ccc; padding-bottom: 10px"
+            label = mapping.user.name
+            = mapping_form.hidden_field :id
+            div
+              lable Target
+              = mapping_form.number_field :target, class: 'form-control'
+            div
+              lable Level
+              = mapping_form.number_field :level, class: 'form-control'
+  = f.submit 'Submit', class: 'btn btn-primary'
