@@ -40,7 +40,7 @@ class Activity < ApplicationRecord
   end
 
   def brief_information
-    "#{start_date_local.strftime('%d-%m')} - #{distance_format} - #{pace_format}"
+    "#{start_date_local.strftime('%d-%m %H:%M')} - #{distance_format} - #{pace_format}"
   end
 
   def self.create_activity(data, user)

@@ -5,3 +5,6 @@
   = link_to 'Connect Strava', Settings.strava_authorization_link, class: 'btn btn-lg btn-success'
 - else
   = link_to 'Strava Connected', Settings.strava_authorization_link, class: 'btn btn-lg btn-success'
+
+h2 Total Point
+= current_user.total_point
