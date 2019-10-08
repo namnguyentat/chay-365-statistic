@@ -22,10 +22,14 @@ ruby:
   table.table.table-striped.table-bordered.table-sm
     thead
       th Min Road(M)
+      th Start
+      th End
       th Min Pace(Min/Km)
       th Max Pace(Min/Km)
     tbody
       td = @challenge.min_distance
+      td = @challenge.start_date.to_date
+      td = @challenge.end_date.to_date
       td = @challenge.min_pace
       td = @challenge.max_pace
 .table-responsive.mb-3
@@ -35,12 +39,7 @@ ruby:
       th style="min-width: 150px" User
       th style="min-width: 50px" Target
       th style="min-width: 50px" Total
-      th style="min-width: 50px" HM
-      th style="min-width: 50px" WO/W1
-      th style="min-width: 50px" WO/W2
-      th style="min-width: 50px" WO/W3
-      th style="min-width: 50px" WO/W4
-      th style="min-width: 50px" WO/W5
+      th style="min-width: 50px" Point
       th style="min-width: 200px" Week 1
       th style="min-width: 200px" Week 2
       th style="min-width: 200px" Week 3
@@ -51,7 +50,6 @@ ruby:
       - @challenge.challenge_user_mappings.order('total desc').preload(:user).each.with_index(1) do |mapping, index|
         - user = mapping.user
         - activities = user.total_activities_in_challenge(@challenge)
-        - hm = activities.select { |a| a.distance >= 21100 }
         - w1_wo = activities.select {|a| a.week == 1}
         - w2_wo = activities.select {|a| a.week == 2}
         - w3_wo = activities.select {|a| a.week == 3}
@@ -63,12 +61,7 @@ ruby:
           td = user.name
           td = mapping.target
           td = total
-          td = hm.count if hm.present?
-          td = w1_wo.count if w1_wo.present?
-          td = w2_wo.count if w2_wo.present?
-          td = w3_wo.count if w3_wo.present?
-          td = w4_wo.count if w4_wo.present?
-          td = w5_wo.count if w5_wo.present?
+          td = mapping.point
           td
             - w1_wo.each do |activity|
               p = activity.brief_information
