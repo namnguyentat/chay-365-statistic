@@ -16,12 +16,8 @@ class ChallengesController < ApplicationController
       redirect_to root_path
       return
     end
-    @challenge = Challenge.new(
-      min_distance: 4000,
-      min_pace: 8,
-      min_trail_distance: 10_000,
-      min_trail_pace: 30
-    )
+    @challenge = Challenge.new
+
   end
 
   def edit
@@ -156,11 +152,20 @@ class ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(
-      :name, :start_date, :end_date,
-      :min_distance, :min_pace, :min_trail_distance,
-      :min_trail_elevation_gain, :min_trail_pace,
-      :w1, :w2, :w3, :w4, :w5, :w6, :km_money, :wo_money, :hm_money,
-      challenge_user_mappings_attributes: %i[id target level]
+      :name,
+      :start_date,
+      :end_date,
+      :min_distance,
+      :min_pace,
+      :max_pace,
+      :point_wo_day,
+      :point_wo_5k,
+      :point_wo_pace8,
+      :point_wo_start_5am,
+      :point_wo_21day,
+      :point_wo_hm,
+      :point_wo_fm,
+      :point_wo_finish_21day
     )
   end
 end

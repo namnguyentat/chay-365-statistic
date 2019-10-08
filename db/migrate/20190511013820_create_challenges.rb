@@ -4,8 +4,8 @@ class CreateChallenges < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :year
       t.integer :month
-      t.date :start_data
-      t.date :end_data
+      t.date :start_date
+      t.date :end_date
       t.integer :min_distance, default: 2000
       t.integer :min_pace, default: 2
       t.integer :max_pace, default: 12

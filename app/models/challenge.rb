@@ -11,8 +11,7 @@ class Challenge < ApplicationRecord
   validates :end_date, presence: true
   validates :min_distance, presence: true
   validates :min_pace, presence: true
-  validates :min_trail_distance, presence: true
-  validates :min_trail_pace, presence: true
+  validates :max_pace, presence: true
 
   scope :order_newest, lambda {
     order(id: :DESC)

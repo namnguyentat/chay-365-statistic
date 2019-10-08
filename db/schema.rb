@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_094407) do
+ActiveRecord::Schema.define(version: 2019_06_04_014938) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_094407) do
     t.text "data", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_activities_on_activity_id", unique: true
+    t.index ["activity_id"], name: "index_activities_on_activity_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 2019_07_26_094407) do
     t.bigint "challenge_id"
     t.integer "target", default: 0
     t.float "total", default: 0.0
+    t.integer "point", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "level", default: 3
     t.index ["challenge_id"], name: "index_challenge_user_mappings_on_challenge_id"
     t.index ["user_id"], name: "index_challenge_user_mappings_on_user_id"
   end
@@ -51,24 +51,26 @@ ActiveRecord::Schema.define(version: 2019_07_26_094407) do
     t.string "name"
     t.integer "year"
     t.integer "month"
-    t.integer "min_distance"
-    t.integer "min_pace"
-    t.integer "min_trail_distance"
-    t.integer "min_trail_pace"
-    t.integer "min_trail_elevation_gain"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.date "start_date"
     t.date "end_date"
-    t.integer "w1", default: 0, null: false
-    t.integer "w2", default: 0, null: false
-    t.integer "w3", default: 0, null: false
-    t.integer "w4", default: 0, null: false
-    t.integer "w5", default: 0, null: false
-    t.integer "w6", default: 0, null: false
-    t.integer "wo_money", default: 0, null: false
-    t.integer "hm_money", default: 0, null: false
-    t.integer "km_money", default: 0, null: false
+    t.integer "min_distance", default: 2000
+    t.integer "min_pace", default: 2
+    t.integer "max_pace", default: 12
+    t.integer "min_trail_pace", default: 2
+    t.integer "max_trail_pace", default: 30
+    t.integer "min_trail_elevation_gain", default: 300
+    t.integer "point_wo_day", default: 0, null: false
+    t.integer "integer", default: 0, null: false
+    t.integer "point_wo_5k", default: 0, null: false
+    t.integer "point_wo_pace8", default: 0, null: false
+    t.integer "point_wo_start_5am", default: 0, null: false
+    t.integer "point_wo_21day", default: 0, null: false
+    t.integer "point_wo_hm", default: 0, null: false
+    t.integer "point_wo_fm", default: 0, null: false
+    t.integer "point_wo_finish_21day", default: 0, null: false
+    t.boolean "wo_limit", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "group_user_mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -104,6 +106,8 @@ ActiveRecord::Schema.define(version: 2019_07_26_094407) do
     t.datetime "strava_last_token_at"
     t.string "team"
     t.string "strava_refresh_token"
+    t.integer "total_point", default: 0, null: false
+    t.integer "level", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
