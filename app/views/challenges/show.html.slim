@@ -9,15 +9,13 @@ ruby:
         | Set Target
       - if current_user.is_admin
         = link_to 'Edit Challenge', edit_challenge_path(@challenge), class: 'btn btn-sm btn-outline-secondary'
+        = link_to 'Update Point', update_point_challenge_path(@challenge), class: 'btn btn-sm btn-outline-secondary'
 
 
 = form_tag set_target_challenge_path(@challenge, user_id: current_user.id), method: :post, class: 'collapse border-bottom pb-2 mb-3', id: 'set-target' do |f|
   .form-group
     label Target
     = number_field_tag :challenge_target, nil, class: 'form-control'
-  / .form-group
-  /   label Level
-  /   = number_field_tag :challenge_level, nil, class: 'form-control'
   = submit_tag 'Submit', level: 'btn btn-primary'
 
 .table-responsive.mb-3
@@ -25,27 +23,11 @@ ruby:
     thead
       th Min Road(M)
       th Min Pace(Min/Km)
-      th Min Trail(M)
-      th Min Pace(Min/Km)
-      th Trail Elevation(M)
-      th WO limit
-      th W1
-      th W2
-      th W3
-      th W4
-      th W5
+      th Max Pace(Min/Km)
     tbody
       td = @challenge.min_distance
       td = @challenge.min_pace
-      td = @challenge.min_trail_distance
-      td = @challenge.min_trail_pace
-      td = @challenge.min_trail_elevation_gain
-      td = @challenge.wo_limit ? 'Yes' : 'No'
-      td = @challenge.w1
-      td = @challenge.w2
-      td = @challenge.w3
-      td = @challenge.w4
-      td = @challenge.w5
+      td = @challenge.max_pace
 .table-responsive.mb-3
   table.table.table-striped.table-bordered.table-sm
     thead
@@ -53,10 +35,6 @@ ruby:
       th style="min-width: 150px" User
       th style="min-width: 50px" Target
       th style="min-width: 50px" Total
-      / th style="min-width: 50px" Level
-      / th style="min-width: 50px" Convert
-      - if show_money
-        th style="min-width: 50px" Money
       th style="min-width: 50px" HM
       th style="min-width: 50px" WO/W1
       th style="min-width: 50px" WO/W2
@@ -85,14 +63,6 @@ ruby:
           td = user.name
           td = mapping.target
           td = total
-          / td = mapping.level
-          / td = (total / mapping.level).floor(2)
-          - if show_money
-            td
-
-              - money = user.total_money_in_challenge(@challenge, activities)
-              - if money.present?
-                = number_to_currency(money, unit: "", separator: ".", delimiter: ",", format: "%n %u", precision: 0)
           td = hm.count if hm.present?
           td = w1_wo.count if w1_wo.present?
           td = w2_wo.count if w2_wo.present?

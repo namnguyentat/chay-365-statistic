@@ -6,14 +6,14 @@ class CreateActivities < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :name, null: false
       t.string :kind, null: false
-      t.string :activity_id, null: false, index: true
+      t.string :activity_id, null: false, index: true, unique: true
       t.string :timezone, null: false
       t.datetime :start_date_local, null: false
       t.integer :distance, null: false
       t.integer :elapsed_time, null: false
       t.integer :moving_time, null: false
-      t.float :pace, null: false
-      t.float :race_pace, null: false
+      t.float :pace, null: true
+      t.float :race_pace, null: true
       t.integer :year, null: false
       t.integer :month, null: false
       t.integer :week, null: false

@@ -23,16 +23,12 @@
           td = challenge.name
           td = "#{challenge.start_date} - #{challenge.end_date}"
           td
-            p = "Road distance: #{challenge.min_distance} m"
-            p = "Road pace: #{challenge.min_pace}"
-            p = "Trail distance: #{challenge.min_trail_distance} m"
-            p = "Trail pace: #{challenge.min_trail_pace}"
-            p = "Trail elevation: #{challenge.min_trail_elevation_gain} m"
+            p = "Min distance: #{challenge.min_distance} m"
+            p = "Min pace: #{challenge.min_pace}"
+            p = "Max pace: #{challenge.max_pace}"
           td = challenge.users.count
           td
             = link_to 'Show', challenge_path(challenge), class: 'btn btn-sm btn-info mr-3 mb-3'
-            / - if ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
-            /   = link_to 'Quit', quit_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
             - if current_user.team_run? && !ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
               = link_to 'Join', join_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3'
             - if current_user.is_admin

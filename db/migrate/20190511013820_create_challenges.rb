@@ -4,11 +4,23 @@ class CreateChallenges < ActiveRecord::Migration[5.2]
       t.string :name
       t.integer :year
       t.integer :month
-      t.integer :min_distance
-      t.float :min_pace
-      t.integer :min_trail_distance
-      t.integer :min_trail_pace
-      t.integer :min_trail_elevation_gain
+      t.date :start_data
+      t.date :end_data
+      t.integer :min_distance, default: 2000
+      t.integer :min_pace, default: 2
+      t.integer :max_pace, default: 12
+      t.integer :min_trail_pace, default: 2
+      t.integer :max_trail_pace, default: 30
+      t.integer :min_trail_elevation_gain, default: 300
+      t.integer :point_wo_day, :integer, null: false, default: 0
+      t.integer :point_wo_5k, :integer, null: false, default: 0
+      t.integer :point_wo_pace8, :integer, null: false, default: 0
+      t.integer :point_wo_start_5am, :integer, null: false, default: 0
+      t.integer :point_wo_21day, :integer, null: false, default: 0
+      t.integer :point_wo_hm, :integer, null: false, default: 0
+      t.integer :point_wo_fm, :integer, null: false, default: 0
+      t.integer :point_wo_finish_21day, :integer, null: false, default: 0
+      t.boolean :wo_limit, default: false
 
       t.timestamps
     end

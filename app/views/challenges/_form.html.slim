@@ -16,56 +16,30 @@
     label Min Pace (min/km)
     = f.number_field :min_pace, class: 'form-control', required: true
   .form-group
-    label Min Trail Distance (metter)
-    = f.number_field :min_trail_distance, class: 'form-control', required: true
+    label Max Pace (min/km)
+    = f.number_field :min_pace, class: 'form-control', required: true
   .form-group
-    label Min Trail Pace (min/km)
-    = f.number_field :min_trail_pace, class: 'form-control', required: true
+    label WO Day Point
+    = f.number_field :point_wo_day, class: 'form-control'
   .form-group
-    label Min Trail Elevation (metter)
-    = f.number_field :min_trail_elevation_gain, class: 'form-control', required: true
+    label WO 5K Point
+    = f.number_field :point_wo_5k, class: 'form-control'
   .form-group
-    label WO limit
-    = f.check_box :wo_limit, class: 'form-control'
+    label WO Pace8 Point
+    = f.number_field :point_wo_pace8, class: 'form-control'
   .form-group
-    label W1 / WO
-    = f.number_field :w1, class: 'form-control', required: true
+    label WO Start 5AM Point
+    = f.number_field :point_wo_start_5am, class: 'form-control'
   .form-group
-    label W2 / WO
-    = f.number_field :w2, class: 'form-control', required: true
+    label Run 21 days Point
+    = f.number_field :point_wo_21day, class: 'form-control'
   .form-group
-    label W3 / WO
-    = f.number_field :w3, class: 'form-control', required: true
+    label WO Hafl Marathon Point
+    = f.number_field :point_wo_hm, class: 'form-control'
   .form-group
-    label W4 / WO
-    = f.number_field :w4, class: 'form-control', required: true
+    label WO Full Marathon Point
+    = f.number_field :point_wo_hm, class: 'form-control'
   .form-group
-    label W5 / WO
-    = f.number_field :w5, class: 'form-control', required: true
-  .form-group
-    label W6 / WO
-    = f.number_field :w6, class: 'form-control', required: true
-  .form-group
-    label KM Money
-    = f.number_field :km_money, class: 'form-control', required: true
-  .form-group
-    label WO Money
-    = f.number_field :wo_money, class: 'form-control', required: true
-  .form-group
-    label HM Money
-    = f.number_field :hm_money, class: 'form-control', required: true
-  .form-group
-    label Users
-    ul
-      - challenge.challenge_user_mappings.order(target: :DESC).each do |mapping|
-        = f.fields_for :challenge_user_mappings, mapping do |mapping_form|
-          li style="border-bottom: 1px solid #ccc; padding-bottom: 10px"
-            label = mapping.user.name
-            = mapping_form.hidden_field :id
-            div
-              lable Target
-              = mapping_form.number_field :target, class: 'form-control'
-            div
-              lable Level
-              = mapping_form.number_field :level, class: 'form-control'
+    label Finish 21 days Point
+    = f.number_field :point_wo_finish_21day, class: 'form-control'
   = f.submit 'Submit', class: 'btn btn-primary'

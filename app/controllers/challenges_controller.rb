@@ -86,6 +86,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @challenge.users.each do |user|
       StravaApi.sync_data(user)
+      user.update_point_in_challenge(@challenge)
     end
     flash[:notice] = 'Sync successfully'
 
@@ -96,6 +97,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @user = User.find(params[:user_id])
     StravaApi.sync_data(@user)
+    @user.update_point_in_challenge(@challenge)
 
     flash[:notice] = 'Sync successfully'
 
